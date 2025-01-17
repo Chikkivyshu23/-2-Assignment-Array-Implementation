@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to print sparse matrix in a readable format
+void print_sparse_matrix(const vector<tuple<int, int, int>>& sparse_matrix, int rows, int cols) {
+    vector<vector<int>> matrix(rows, vector<int>(cols, 0));
+
+    // Filling in the non-zero elements
+    for (auto& element : sparse_matrix) {
+        int row = get<0>(element);
+        int col = get<1>(element);
+        int value = get<2>(element);
+        matrix[row][col] = value;
+    }
+
+    // Printing the matrix
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    // Sparse Matrix in (Row, Column, Value) format
+    vector<tuple<int, int, int>> sparse_matrix = {
+        make_tuple(0, 2, 3), // Row 0, Column 2, Value 3
+        make_tuple(2, 0, 4), // Row 2, Column 0, Value 4
+        make_tuple(2, 3, 5), // Row 2, Column 3, Value 5
+        make_tuple(4, 4, 6)  // Row 4, Column 4, Value 6
+    };
+
+    int rows = 5;
+    int cols = 5;
+
+    // Print sparse matrix
+    cout << "Sparse Matrix (from array representation):" << endl;
+    print_sparse_matrix(sparse_matrix, rows, cols);
+
+    return 0;
+}
